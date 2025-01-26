@@ -93,7 +93,19 @@
 
       document.addEventListener("DOMContentLoaded", function() {
           let paramData = getQueryParam('date');
-          if (!paramData || paramData === 'tomorrow') {
+          let now = new Date();
+          let hours = now.getHours();
+
+          if (!paramData) {
+            if (hours < 18) {
+                paramData = getTomorrowDate()    
+            }
+            else {
+                paramData = getTodayDate()
+            }
+          }
+
+          if (paramData === 'tomorrow') {
             paramData = getTomorrowDate()
           }
           if (paramData === 'today') {

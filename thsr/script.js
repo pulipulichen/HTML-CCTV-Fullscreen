@@ -77,13 +77,13 @@ document.getElementById('originStation').addEventListener('change', fetchTimetab
           }
           var url = `https://tdx.transportdata.tw/api/basic/v2/Rail/THSR/DailyTimetable/OD/${origin}/to/${destination}/${selectedDate}`;
           
-          let cachedData = localStorage.getItem(url)
+          let cachedData = sessionStorage.getItem(url)
 
           if (!cachedData) {
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
-                  localStorage.setItem(url, JSON.stringify(data));
+                  sessionStorage.setItem(url, JSON.stringify(data));
                   return displayResults(data)
                 })
                 .catch(error => console.error('Error fetching data:', error));

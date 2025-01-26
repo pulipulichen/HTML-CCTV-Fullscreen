@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>臺鐵時刻查詢跳轉</title>
+</head>
+<body>
+    <form id="traForm" action="https://www.railway.gov.tw/tra-tip-web/tip/tip001/tip112/querybytime" method="POST">
+        <!-- <input type="hidden" name="_csrf" value="338d50f1-65cb-4de4-9be7-060759b87302"> -->
+        <input type="hidden" name="startStation" value="4360-內惟">
+        <input type="hidden" name="endStation" value="4340-新左營">
+        <input type="hidden" name="transfer" value="ONE">
+        <input type="hidden" id="rideDate" name="rideDate" value="">
+        <input type="hidden" name="startOrEndTime" value="true">
+        <input type="hidden" name="startTime" value="00:00">
+        <input type="hidden" name="endTime" value="23:59">
+        <input type="hidden" name="trainTypeList" value="ALL">
+        <input type="hidden" name="queryClassification" value="NORMAL">
+        <input type="hidden" name="query" value="%E6%9F%A5%E8%A9%A2">
+        <script>
+            var tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            var formattedDate = tomorrow.getFullYear() + '/' + ('0' + (tomorrow.getMonth() + 1)).slice(-2) + '/' + ('0' + tomorrow.getDate()).slice(-2);
+            document.getElementById('rideDate').value = formattedDate;
+            document.getElementById('traForm').submit();
+        </script>
+    </form>
+    <p>如果您的瀏覽器沒有自動跳轉，請 <button onclick="document.getElementById('traForm').submit();">點擊此處</button>。</p>
+</body>
+</html>

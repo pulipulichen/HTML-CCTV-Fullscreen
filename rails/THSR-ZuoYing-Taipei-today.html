@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高鐵時刻查詢跳轉</title>
+    <script>
+        window.onload = function() {
+            var today = new Date();
+            var formattedDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+            var url = "https://tdx.transportdata.tw/api/basic/v2/Rail/THSR/DailyTimetable/OD/1070/to/1000/" + formattedDate;
+            window.location.href = url;
+        };
+    </script>
+</head>
+<body>
+    <p>如果您的瀏覽器沒有自動跳轉，請 <a id="manualLink" href="#">點擊此處</a>。</p>
+    <script>
+        var today = new Date();
+        var formattedDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+        document.getElementById('manualLink').href = "https://tdx.transportdata.tw/api/basic/v2/Rail/THSR/DailyTimetable/OD/1070/to/1000/" + formattedDate;
+    </script>
+</body>
+</html>

@@ -17,12 +17,8 @@
           background: #f9f9f9;
           z-index: 2;
       }
-      .vertical-center {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        -ms-transform: translateY(-50%);
-        transform: translateY(-50%);
+      .highlight { 
+        background-color: yellow; 
       }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -135,9 +131,23 @@
   <th>[${rail.DestinationStopTime.StationName.Zh_tw}] 抵達時間</th>
 </thead>
 <tbody>`;
+          let now = new Date();
+          let departureTime = new Date();
+          let nextTrainFound = false;
           data.forEach(train => {
+              
+              let timeParts = train.OriginStopTime.DepartureTime.split(":");
+              departureTime.setHours(timeParts[0], timeParts[1], 0);
+
+              if (!nextTrainFound && departureTime > now) {
+                  nextTrainFound = true;
+                  highlightClass = 'highlight';
+              } else {
+                  highlightClass = '';
+              }
+
               let trainInfo = `
-                  <tr>
+                  <tr class="${highlightClass}">
                       <td>${train.DailyTrainInfo.TrainNo}</td>
                       <td>${train.OriginStopTime.DepartureTime}</td>
                       <td>${train.DestinationStopTime.ArrivalTime}</td>
@@ -148,6 +158,11 @@
 
           resultContainerHTML += '</tbody></table>';
           document.getElementById('results').innerHTML = resultContainerHTML;
+
+          const highlightedElement = document.querySelector('.highlight');
+          if (highlightedElement) {
+              highlightedElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
       }
   </script>
 

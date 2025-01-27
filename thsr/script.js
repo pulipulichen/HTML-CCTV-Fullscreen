@@ -20,7 +20,7 @@ document.getElementById('originStation').addEventListener('change', fetchTimetab
       }
 
       function fetchStations() {
-          fetch('https://tdx.transportdata.tw/api/basic/v2/Rail/THSR/Station')
+          fetch('./Station.xml')
               .then(response => response.json())
               .then(data => {
                   // console.log(data)
